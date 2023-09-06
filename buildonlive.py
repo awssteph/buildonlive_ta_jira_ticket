@@ -8,6 +8,7 @@ import os
 
 role_arn = os.environ['ROLEARN'] 
 account_id= boto3.client('sts').get_caller_identity().get('Account')
+account_id_jira_felid = 'customfield_10070' #os.environ['CUSTOMFELID'] 
 
 ignore_check_list = ['Amazon EC2 Reserved Instance Lease Expiration', 'Amazon EC2 Reserved Instance Optimization', 'Amazon ElastiCache Reserved Node Optimization', 'Amazon OpenSearch Service Reserved Instance Optimization', 'Amazon Redshift Reserved Node Optimization', 'Amazon Relational Database Service (RDS) Reserved Instance Optimization']
 
@@ -33,7 +34,7 @@ def jira_ticket(jira_connection, summary, description, account_id):
         'summary': str(summary),
         'description': str(description),
         'issuetype': {'name': 'Task'},
-        'customfield_10070': account_id # found code from inspecting the jira, must be a better way
+        f'{account_id_jira_felid}': account_id # found code from inspecting the jira, must be a better way
     } 
 
 
@@ -72,6 +73,7 @@ def assume_role(account_id, service, region, role):
 
 def get_guides(check_name):
     #tbd
+    prinnt('hi')
 
 
 lambda_handler(None, None)
