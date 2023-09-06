@@ -26,12 +26,13 @@ def jira_connection():
     )
     return jira_connection
 
-def jira_ticket(jira_connection, summary, description):
+def jira_ticket(jira_connection, summary, description, account_id):
     issue_dict = {
         'project': {'key': 'COST'},
         'summary': str(summary),
         'description': str(description),
         'issuetype': {'name': 'Task'},
+        'customfield_10070': account_id # found code from inspecting the jira, must be a better way
     } # coloumn 
 
 
@@ -54,7 +55,7 @@ def read_ta(account_id, f_name):
             #ts = datetime.strptime(dt, '%Y-%m-%dT%H:%M:%SZ').strftime('%s')
             for resource in result["flaggedResources"]:
                 print(resource)
-                jira_ticket(connection, check_name, resource)
+                jira_ticket(connection, check_name, resource, account_id)
                 
             #    import pdb; pdb.set_trace()
             #     output = {}
