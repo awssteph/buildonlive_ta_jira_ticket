@@ -4,6 +4,7 @@ from botocore.client import Config
 from botocore.exceptions import ClientError
 import logging
 import json
+import os
 
 role_arn = os.environ['ROLEARN'] 
 account_id= boto3.client('sts').get_caller_identity().get('Account')
