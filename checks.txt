@@ -1,0 +1,19 @@
+['Amazon EC2 Reserved Instance Lease Expiration', 'Amazon EC2 Reserved Instance Optimization', 'Amazon ElastiCache Reserved Node Optimization', 'Amazon OpenSearch Service Reserved Instance Optimization', 'Amazon Redshift Reserved Node Optimization', 'Amazon Relational Database Service (RDS) Reserved Instance Optimization']
+
+
+
+Amazon Comprehend Underutilized Endpoints
+Amazon EBS over-provisioned volumes
+Amazon EC2 instances consolidation for Microsoft SQL Server
+Amazon EC2 instances over-provisioned for Microsoft SQL Server
+Amazon RDS Idle DB Instances
+Amazon Route 53 Latency Resource Record Sets
+AWS Lambda Functions with Excessive Timeouts
+AWS Lambda Functions with High Error Rates
+AWS Lambda over-provisioned functions for memory size
+AWS Well-Architected high risk issues for cost optimization
+Idle Load Balancers
+Low Utilization Amazon EC2 Instances
+Unassociated Elastic IP Addresses
+Underutilized Amazon EBS Volumes
+Underutilized Amazon Redshift Clusters

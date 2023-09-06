@@ -9,6 +9,7 @@ import os
 role_arn = os.environ['ROLEARN'] 
 account_id= boto3.client('sts').get_caller_identity().get('Account')
 
+ignore_check_list = ['Amazon EC2 Reserved Instance Lease Expiration', 'Amazon EC2 Reserved Instance Optimization', 'Amazon ElastiCache Reserved Node Optimization', 'Amazon OpenSearch Service Reserved Instance Optimization', 'Amazon Redshift Reserved Node Optimization', 'Amazon Relational Database Service (RDS) Reserved Instance Optimization']
 
 def lambda_handler(event, context):
     print(event)
@@ -33,7 +34,7 @@ def jira_ticket(jira_connection, summary, description, account_id):
         'description': str(description),
         'issuetype': {'name': 'Task'},
         'customfield_10070': account_id # found code from inspecting the jira, must be a better way
-    } # coloumn 
+    } 
 
 
     new_issue = jira_connection.create_issue(fields=issue_dict)
@@ -45,28 +46,15 @@ def read_ta(account_id, f_name):
     checks = support.describe_trusted_advisor_checks(language="en")["checks"]
 
     for check in checks:
-        #print(json.dumps(check))
         if (check.get("category") != "cost_optimizing"): continue
         try:
             result = support.describe_trusted_advisor_check_result(checkId=check["id"], language="en")['result']
             check_name = check["name"]
-            #print(json.dumps(result))
-            #dt = result['timestamp']
-            #ts = datetime.strptime(dt, '%Y-%m-%dT%H:%M:%SZ').strftime('%s')
-            for resource in result["flaggedResources"]:
-                print(resource)
-                jira_ticket(connection, check_name, resource, account_id)
+            if check_name not in ignore_check_list:
+                for resource in result["flaggedResources"]:
+                    print(resource)
+                    jira_ticket(connection, check_name, resource['metadata'], account_id)
                 
-            #    import pdb; pdb.set_trace()
-            #     output = {}
-            #     if "metadata" in resource:
-            #         output.update(dict(zip(check["metadata"], resource["metadata"])))
-            #         del resource['metadata']
-            #     resource["Region"] = resource.pop("region") if "region" in resource else '-'
-            #     resource["Status"] = resource.pop("status") if "status" in resource else '-'
-            #     output.update({"AccountId":account_id, "AccountName":account_name, "Category": check["category"], 'DateTime': dt, 'Timestamp': ts, "CheckName": check["name"], "CheckId": check["id"]})
-            #     output.update(resource)
-            #     f.write(json.dumps(output, default=_json_serial) + "\n")
         except Exception as e:
             print(f'{type(e)}: {e}')
 
@@ -80,5 +68,10 @@ def assume_role(account_id, service, region, role):
         aws_secret_access_key=creds['SecretAccessKey'],
         aws_session_token=creds['SessionToken'],
     )
+
+
+def get_guides(check_name):
+    #tbd
+
 
 lambda_handler(None, None)
