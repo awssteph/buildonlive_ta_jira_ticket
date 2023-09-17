@@ -55,7 +55,6 @@ def read_ta(account_id):
             if check_name not in ignore_check_list:
                 for resource in result["flaggedResources"]:
                     ta_data = dict(zip(check['metadata'], resource['metadata']))
-                    #print(ta_data)
                     ticket = jira_ticket(connection, check_name, ta_data, account_id, guide_jira_felid )
                     print(f"{ticket}-{check_name}")
         except Exception as e:
