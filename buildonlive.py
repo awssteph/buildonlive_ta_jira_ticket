@@ -8,7 +8,7 @@ import os
 
 role_arn = os.environ['ROLEARN'] 
 account_id= boto3.client('sts').get_caller_identity().get('Account')
-account_id_jira_felid = 'customfield_10070' #os.environ['CUSTOMFELID'] 
+account_id_jira_felid = 'customfield_10070' #os.environ['CUSTOMFELID'] #https://community.atlassian.com/t5/Jira-questions/Jira-Next-Gen-Python-API-Create-Issue-with-Custom-Field/qaq-p/2036396
 guide_jira_felid = 'customfield_10071' #os.environ['CUSTOMFELID']
 
 
@@ -17,7 +17,7 @@ ignore_check_list = ['Amazon EC2 Reserved Instance Lease Expiration', 'Amazon EC
 def lambda_handler(event, context):
     read_ta(account_id)
 
-def jira_connection():
+def jira_connection(): # https://jira.readthedocs.io/api.html#jira.jirashell.handle_basic_auth
     email = os.environ['EMAIL']
     api_token = os.environ['API_TOKEN']
     server = os.environ['SERVER']
@@ -45,12 +45,12 @@ def jira_ticket(jira_connection, summary, description, account_id, guide):
 def read_ta(account_id):
     connection = jira_connection()
     support = assume_role(account_id, "support", "us-east-1", role_arn)
-    checks = support.describe_trusted_advisor_checks(language="en")["checks"]
+    checks = support.describe_trusted_advisor_checks(language="en")["checks"] #https://boto3.amazonaws.com/v1/documentation/api/1.26.93/reference/services/support/client/describe_trusted_advisor_checks.html
 
     for check in checks:
         if (check.get("category") != "cost_optimizing"): continue
         try:
-            result = support.describe_trusted_advisor_check_result(checkId=check["id"], language="en")['result']
+            result = support.describe_trusted_advisor_check_result(checkId=check["id"], language="en")['result'] #https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/support/client/describe_trusted_advisor_check_result.html
             check_name = check["name"]
             if check_name not in ignore_check_list:
                 for resource in result["flaggedResources"]:

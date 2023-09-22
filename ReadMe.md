@@ -1,13 +1,27 @@
 
 Build Live Plans 
+BEFORE
+login terminal
+export key?
+open tabs
+Apple-Shift-B  - close bookmarks and wordreplace
+
 
 * Check Trusted advisor checks 
+Show checks and explain the goal
+
+* build code for TA
+https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/support/client/describe_trusted_advisor_check_result.html
 
 * Setup board and custom field 
-Find the checks ID
 
+https://costoptimization.atlassian.net/jira/core/projects/COST/list 
+Find the checks ID = 
+    1. Create test ticket
+    2. selecta and rightclick account id - click inspect
+    3. cmf+f customf
 
-* build code
+*build code for jira
 https://community.atlassian.com/t5/Jira-questions/Jira-Next-Gen-Python-API-Create-Issue-with-Custom-Field/qaq-p/2036396
 
 
