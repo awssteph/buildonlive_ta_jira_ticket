@@ -1,0 +1,25 @@
+
+1. Get Trusted advisor Data
+2. Connect to Jira
+3. Create Tickets
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. Whats next? 
+    Ignore list 
+    Cutsom feild 
+    Guide
+    Organization 
+    No Duplicate Tickets

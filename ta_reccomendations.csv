@@ -1,0 +1,15 @@
+﻿id,Check,Link,estimtated time mins,Action
+Cm24dfsM12,Amazon Comprehend Underutilized Endpoints,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#amazon-comprehend-underutilized-endpoints,60,Delete
+C0r6dfpM03,Amazon EBS over-provisioned volumes,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#amazon-ebs-over-provisioned-volumes,15,Snapshot and Resize
+Qsdfp3A4L2,Amazon EC2 instances consolidation for Microsoft SQL Server,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#ec2-instances-consolidation-sql-server,60,Consolidate  SQL Server instances to help lower costs.
+Qsdfp3A4L1,Amazon EC2 instances over-provisioned for Microsoft SQL Server,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#ec2-instance-over-provisioned-microsoft-sql-server,60,Review and Resize
+Ti39halfu8,Amazon RDS Idle DB Instances,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#amazon-rds-idle-dbs-instances,60,Stop and Review
+51fC20e7I2,Amazon Route 53 Latency Resource Record Sets,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#amazon-route-53-latency-resource-record-sets,60,Define a latency resource record set
+L4dfs2Q3C3,AWS Lambda Functions with Excessive Timeouts,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#aws-lambda-functions-excessive-timeouts,30,Review Configuration
+L4dfs2Q3C2,AWS Lambda Functions with High Error Rates,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#aws-lambda-functions-with-high-error-rates,30,Review Configuration
+COr6dfpM05,AWS Lambda over-provisioned functions for memory size,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#aws-lambda-over-provisioned-functions-memory-size,30,Review Configuration
+hjLMh88uM8,Idle Load Balancers,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#idle-load-balancers,15,Review Instance attachement and Delete/Fix Configuration
+Qch7DwouX1,Low Utilization Amazon EC2 Instances,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#low-utilization-amazon-ec2-instances,15,Review and Delete
+Z4AUBRNSmz,Unassociated Elastic IP Addresses,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#unassociated-elastic-ip-addresses,15,Review and Delete
+DAvU99Dc4C,Underutilized Amazon EBS Volumes,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#underutilized-amazon-ebs-volumes,15,Review and Delete
+G31sQ1E9U,Underutilized Amazon Redshift Cluster,https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#underutilized-amazon-redshift-clusters,30,Review and Delete
