@@ -155,7 +155,6 @@ Resources:
           - Arn
       Environment:
         Variables:
-          BUCKET_NAME:  !Sub "${DestinationBucket}${AWS::AccountId}"
           API_TOKEN: !Ref APIToken
           SERVER: !Ref Server
           EMAIL: !Ref Email
