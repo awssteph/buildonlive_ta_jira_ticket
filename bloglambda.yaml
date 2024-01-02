@@ -2,11 +2,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Main CF template that builds shared resources and other stacks
 Parameters:
-  DestinationBucket:
-    Type: String
-    Description: Name of the S3 Bucket that is created to hold data
-    AllowedPattern: (?=^.{3,63}$)(?!^(\d+\.)+\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$)
-    Default: jiradestinationbucket
   Email:
     Type: String
     Description: Get your email that you have for Jira
@@ -40,23 +35,6 @@ Mappings:
        eu-west-3:        {CodeBucket: aws-well-architected-labs-paris }
        sa-east-1:        {CodeBucket: aws-well-architected-labs-san-paulo }
 Resources:
-  S3Bucket:
-    Type: 'AWS::S3::Bucket'
-    Properties:
-      BucketName:
-        !Sub "${DestinationBucket}${AWS::AccountId}"
-      LifecycleConfiguration:
-        Rules:
-        - Id: delete-incomplete-mpu-7days
-          Prefix: ''
-          AbortIncompleteMultipartUpload:
-            DaysAfterInitiation: 7
-          ExpiredObjectDeleteMarker: True
-          Status: Enabled
-      BucketEncryption:
-        ServerSideEncryptionConfiguration:            
-          - ServerSideEncryptionByDefault:
-              SSEAlgorithm: 'AES256'
   CloudWatchTrigger:
     Type: AWS::Events::Rule
     Properties:
@@ -98,12 +76,6 @@ Resources:
                   - "logs:PutLogEvents"
                   - "logs:DescribeLogStreams"
                 Resource: "arn:aws:logs:*:*:*"
-              - Effect: "Allow"
-                Action:
-                  - "s3:PutObject"
-                  - "s3:ListBucket"
-                  - "s3:GetBucketLocation"
-                Resource: !GetAtt S3Bucket.Arn
               - Effect: "Allow"
                 Action:
                   - "support:*"
