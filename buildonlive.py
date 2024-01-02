@@ -5,6 +5,7 @@ from botocore.exceptions import ClientError
 import logging
 import json
 import os
+import csv
 
 role_arn = os.environ['ROLEARN'] 
 account_id= boto3.client('sts').get_caller_identity().get('Account')
@@ -78,3 +79,19 @@ def get_guides(check_name):
 
 
 lambda_handler(None, None)
+
+def csv_to_json(csv_file_path, json_file_path):
+    data_dict = {}
+    with open(csv_file_path, encoding = 'utf-8') as csv_file_handler:
+        csv_reader = csv.DictReader(csv_file_handler)
+        for rows in csv_reader:
+            key = rows['Serial Number']
+            data_dict[key] = rows
+    with open(json_file_path, 'w', encoding = 'utf-8') as json_file_handler:
+        #Step 4
+        json_file_handler.write(json.dumps(data_dict, indent = 4))
+
+csv_file_path = input('Enter the absolute path of the CSV file: ')
+json_file_path = input('Enter the absolute path of the JSON file: ')
+ 
+csv_to_json(csv_file_path, json_file_path)

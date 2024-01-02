@@ -28,6 +28,7 @@ https://community.atlassian.com/t5/Jira-questions/Jira-Next-Gen-Python-API-Creat
 * build role
 
 * build lambda
+https://aws-well-architected-labs.s3.us-west-2.amazonaws.com/Cost/Labs/jira/lambda.yaml
 
 * build layer
 https://towardsdatascience.com/python-packages-in-aws-lambda-made-easy-8fbc78520e30
