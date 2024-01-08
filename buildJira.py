@@ -22,7 +22,8 @@ def get_parameter_store(parameter_name):
     API_TOKEN = response['Parameter']['Value']
     return API_TOKEN
 
-def jira_connection(api_token): # https://jira.readthedocs.io/api.html#jira.jirashell.handle_basic_auth
+def jira_connection(api_token): 
+    # https://jira.readthedocs.io/api.html#jira.jirashell.handle_basic_auth
     email = os.environ['EMAIL']
     #api_token = os.environ['API_TOKEN']
     server = os.environ['SERVER']
@@ -33,13 +34,14 @@ def jira_connection(api_token): # https://jira.readthedocs.io/api.html#jira.jira
     )
     return jira_connection
 
-def list_jira_tickets(jira_connection, project_key):
+def list_jira_tickets(jira_connection, project_key): 
+    #https://www.geeksforgeeks.org/how-to-fetch-data-from-jira-in-python/
     jiraOptions = {'server': "https://costoptimization.atlassian.net"} 
     jira = JIRA(options=jiraOptions, basic_auth=( 
     "costoptimization@amazon.com", "ATATT3xFfGF0E1ySeeICNEetDPkuFPpSaHW-eVPOBKwb0L6Kr22zgQTOa0pSHKtSkHs30t5by24Y4YdpkMcjYgIhlmx9Dm7JKr5d-0tM95HDfrFyQO1VcVieIUEyJHWdkb_fv4sQItgWOfTBXWGx3DMIV3L2lrpvt35bEVAR7FHrxAeGHHi1OnA=8CA66DE4")) 
     for singleIssue in jira.search_issues(jql_str='project = BuildonLiveDemo'): 
         print('{}: {}:{}'.format(singleIssue.key, singleIssue.fields.summary, singleIssue.fields.reporter.displayName)) 
-    #issue = jira.issue('JRA-1330', fields='summary,comment')
+
 
 
 
@@ -61,8 +63,8 @@ def read_ta(account_id):
 
     connection = jira_connection(api_token)
     project_key = os.environ['PROJECT_KEY'] 
-    list_jira_tickets(jira_connection, project_key)
-    raise
+    # list_jira_tickets(jira_connection, project_key)
+    # raise
     support = boto3.client('support', 'us-east-1')
     checks = support.describe_trusted_advisor_checks(language="en")["checks"] #https://boto3.amazonaws.com/v1/documentation/api/1.26.93/reference/services/support/client/describe_trusted_advisor_checks.html
 
