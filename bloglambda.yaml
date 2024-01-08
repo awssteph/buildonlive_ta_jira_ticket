@@ -124,11 +124,13 @@ Resources:
               email = os.environ['EMAIL']
               #api_token = os.environ['API_TOKEN']
               server = os.environ['SERVER']
-              
-              jira_connection = JIRA(
-                  basic_auth=(email, api_token),
-                  server= server
-              )
+              try:
+                  jira_connection = JIRA(
+                      basic_auth=(email, api_token),
+                      server= server
+                  )
+              except Exception as e:
+                  print(f'{type(e)}: {e}')
               return jira_connection
 
           def jira_ticket(jira_connection, summary, description):
@@ -139,7 +141,6 @@ Resources:
                   'description': str(description),
                   'issuetype': {'name': 'Task'}
               } 
-
               new_issue = jira_connection.create_issue(fields=issue_dict)
               return new_issue
 
