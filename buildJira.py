@@ -40,9 +40,7 @@ def list_jira_tickets(jira_connection, project_key):
     jira = JIRA(options=jiraOptions, basic_auth=( 
     "costoptimization@amazon.com", "ATATT3xFfGF0E1ySeeICNEetDPkuFPpSaHW-eVPOBKwb0L6Kr22zgQTOa0pSHKtSkHs30t5by24Y4YdpkMcjYgIhlmx9Dm7JKr5d-0tM95HDfrFyQO1VcVieIUEyJHWdkb_fv4sQItgWOfTBXWGx3DMIV3L2lrpvt35bEVAR7FHrxAeGHHi1OnA=8CA66DE4")) 
     for singleIssue in jira.search_issues(jql_str='project = BuildonLiveDemo'): 
-        print('{}: {}:{}'.format(singleIssue.key, singleIssue.fields.summary, singleIssue.fields.reporter.displayName)) 
-
-
+        print('{}:{}'.format(singleIssue.key, singleIssue.fields.summary)) 
 
 
 def jira_ticket(jira_connection, summary, description):
@@ -75,7 +73,7 @@ def read_ta(account_id):
             check_name = check["name"]
             if check_name not in ignore_check_list:
                 for resource in result["flaggedResources"]:
-                    unique_id = f"{resource['resourceId']}-{check_name}"
+                    unique_id = f"{{check_name}-resource['resourceId']}"
                     print(unique_id)
                     ta_data = dict(zip(check['metadata'], resource['metadata']))
                     description = f'check_name: {check_name} data:{ta_data} account_id: {account_id}'
