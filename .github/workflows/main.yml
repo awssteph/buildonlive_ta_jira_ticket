@@ -1,10 +1,10 @@
-name: learn-github-actions
+name: cfn-github-actions
 on:
   pull_request:
     branches:
     - main
 jobs:
-  check-bats-version:
+  check-cfn:
     runs-on: ubuntu-latest
     steps:
       - uses: stelligent/cfn_nag@v0.8.6
