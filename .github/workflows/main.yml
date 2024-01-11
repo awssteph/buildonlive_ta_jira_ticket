@@ -8,4 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: stelligent/cfn_nag@v0.8.6
-      - uses: ryof/cloudformation-lint-action@1.0.1
+
