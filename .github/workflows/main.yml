@@ -8,4 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: stelligent/cfn_nag@v0.8.6
+        with:
+          input_path: . 
+          extra_args: --fail-on-warnings -o json
 
