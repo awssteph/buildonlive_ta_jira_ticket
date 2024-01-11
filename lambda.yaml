@@ -6,7 +6,7 @@ Parameters:
     Type: String
     Description: Name of the S3 Bucket that is created to hold data
     AllowedPattern: (?=^.{3,63}$)(?!^(\d+\.)+\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])\.)*([a-z0-9]|[a-z0-9][a-z0-9\-]*[a-z0-9])$)
-    Default: jiradestinationbucket
+    Default: jiradestinationbuckets
   Email:
     Type: String
     Description: Get your email that you have for Jira
