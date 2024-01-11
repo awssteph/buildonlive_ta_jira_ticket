@@ -125,8 +125,6 @@ Resources:
           account_id= boto3.client('sts').get_caller_identity().get('Account')
           account_id_jira_felid = 'customfield_10070' #os.environ['CUSTOMFELID'] #https://community.atlassian.com/t5/Jira-questions/Jira-Next-Gen-Python-API-Create-Issue-with-Custom-Field/qaq-p/2036396
           guide_jira_felid = 'customfield_10071' #os.environ['CUSTOMFELID']
-
-
           ignore_check_list = ['Amazon EC2 Reserved Instance Lease Expiration', 'Amazon EC2 Reserved Instance Optimization', 'Amazon ElastiCache Reserved Node Optimization', 'Amazon OpenSearch Service Reserved Instance Optimization', 'Amazon Redshift Reserved Node Optimization', 'Amazon Relational Database Service (RDS) Reserved Instance Optimization']
 
           def lambda_handler(event, context):
