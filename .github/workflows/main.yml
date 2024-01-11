@@ -9,6 +9,6 @@ jobs:
     steps:
       - uses: stelligent/cfn_nag@v0.8.6
         with:
-          input_path: lambda.yaml
+          input_path: .
           extra_args: --fail-on-warnings -o json
 
