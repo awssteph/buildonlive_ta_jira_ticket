@@ -232,6 +232,6 @@ Resources:
         - python3.11
       Content:
         S3Bucket: !FindInMap [RegionMap, !Ref "AWS::Region", CodeBucket]
-        S3Key: Cost/Labs/jira/jira_layer.zip
+        S3Key: Cost/Blogs/jira/jira_layer.zip
       Description: jira layer
       LayerName: jira-layer
