@@ -16,7 +16,6 @@ Parameters:
   APIToken:
     Type: String
     Description: API token from Jira https://docs.searchunify.com/Content/Content-Sources/Atlassian-Jira-Confluence-Authentication-Create-API-Token.htm
-
 Mappings:
   RegionMap:
        eu-west-1:        {CodeBucket: aws-well-architected-labs-ireland }
