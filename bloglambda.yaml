@@ -90,7 +90,7 @@ Resources:
                   - "ssm:Describe*"
                   - "ssm:Get*"
                   - "ssm:List*"
-                Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/{ParameterName}"
+                Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ParameterName}"
               
   Lambda:
     Type: AWS::Lambda::Function
