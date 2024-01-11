@@ -1,10 +1,12 @@
-- name: Stelligent cfn_nag
-  # You may pin to the exact commit or the version.
-  # uses: stelligent/cfn_nag@1893b15187c451b966edbe8cc29633ca10203f8d
-  uses: stelligent/cfn_nag@v0.8.6
-  with:
-    # Where cfn_nag_scan should scan for violations (default: $GITHUB_WORKSPACE).
-    input_path: # optional, default is .
-    # Additional arguments to pass to cfn_nag_scan, separated by space (default: "--print-suppression").
-    extra_args: # optional, default is --print-suppression
-          
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions
+on:
+  pull_request:
+    branches:
+    - main
+jobs:
+  check-bats-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: stelligent/cfn_nag@v0.8.6
+      - uses: ryof/cloudformation-lint-action@1.0.1
