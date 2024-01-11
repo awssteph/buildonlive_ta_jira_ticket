@@ -8,6 +8,7 @@ import os
 
 email = os.environ['EMAIL']
 server = os.environ['SERVER']
+project_name = os.environ['PROJECT_NAME']
 account_id= boto3.client('sts').get_caller_identity().get('Account')
 
 ignore_check_list = ['Amazon EC2 Reserved Instance Lease Expiration', 'Amazon EC2 Reserved Instance Optimization', 'Amazon ElastiCache Reserved Node Optimization', 'Amazon OpenSearch Service Reserved Instance Optimization', 'Amazon Redshift Reserved Node Optimization', 'Amazon Relational Database Service (RDS) Reserved Instance Optimization']
@@ -39,7 +40,7 @@ def list_jira_tickets(api_token, project_key):
     jiraOptions = {'server': server} 
     jira = JIRA(options=jiraOptions, basic_auth=( 
     email, api_token)) 
-    for singleIssue in jira.search_issues(jql_str='project = BuildonLiveDemo'): 
+    for singleIssue in jira.search_issues(jql_str=f'project = {project_name}'): 
         #print('{}:{}'.format(singleIssue.key, singleIssue.fields.summary)) 
         tickets.append(f"{singleIssue.fields.summary}")
     return tickets
