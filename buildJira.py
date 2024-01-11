@@ -6,6 +6,8 @@ import logging
 import json
 import os
 
+email = os.environ['EMAIL']
+server = os.environ['SERVER']
 account_id= boto3.client('sts').get_caller_identity().get('Account')
 
 ignore_check_list = ['Amazon EC2 Reserved Instance Lease Expiration', 'Amazon EC2 Reserved Instance Optimization', 'Amazon ElastiCache Reserved Node Optimization', 'Amazon OpenSearch Service Reserved Instance Optimization', 'Amazon Redshift Reserved Node Optimization', 'Amazon Relational Database Service (RDS) Reserved Instance Optimization']
@@ -24,9 +26,6 @@ def get_parameter_store(parameter_name):
 
 def jira_connection(api_token): 
     # https://jira.readthedocs.io/api.html#jira.jirashell.handle_basic_auth
-    email = os.environ['EMAIL']
-    #api_token = os.environ['API_TOKEN']
-    server = os.environ['SERVER']
     
     jira_connection = JIRA(
         basic_auth=(email, api_token),
@@ -34,12 +33,12 @@ def jira_connection(api_token):
     )
     return jira_connection
 
-def list_jira_tickets(jira_connection, project_key): 
+def list_jira_tickets(api_token, project_key): 
     #https://www.geeksforgeeks.org/how-to-fetch-data-from-jira-in-python/
     tickets = []
-    jiraOptions = {'server': ""} 
+    jiraOptions = {'server': server} 
     jira = JIRA(options=jiraOptions, basic_auth=( 
-    "", "")) 
+    email, api_token)) 
     for singleIssue in jira.search_issues(jql_str='project = BuildonLiveDemo'): 
         #print('{}:{}'.format(singleIssue.key, singleIssue.fields.summary)) 
         tickets.append(f"{singleIssue.fields.summary}")
@@ -65,7 +64,7 @@ def read_ta(account_id):
 
     connection = jira_connection(api_token)
     project_key = os.environ['PROJECT_KEY'] 
-    tickets = list_jira_tickets(jira_connection, project_key)
+    tickets = list_jira_tickets(api_token, project_key)
     
     support = boto3.client('support', 'us-east-1')
     checks = support.describe_trusted_advisor_checks(language="en")["checks"] #https://boto3.amazonaws.com/v1/documentation/api/1.26.93/reference/services/support/client/describe_trusted_advisor_checks.html
