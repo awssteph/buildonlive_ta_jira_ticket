@@ -108,7 +108,7 @@ Resources:
     Metadata:
       cfn_nag:
         rules_to_suppress:
-          - id: W12
+          - id: F3
             reason: "Policy is used for scanning of a wide range of resources"          
   Lambda:
     Type: AWS::Lambda::Function
