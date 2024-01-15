@@ -7,8 +7,26 @@ jobs:
   check-cfn:
     runs-on: ubuntu-latest
     steps:
-      - uses: stelligent/cfn_nag@v0.8.6
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          input_path: .
-          extra_args: --fail-on-warnings -o json
+          python-version: '3.10'
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+      - name: Install CFN tools
+        run: |
+          gem install cfn-nag
+      - name: CFN Nag scan
+        run: |
+          cfn_nag_scan --input-path  ./lamnda.yaml
+      - name: Install cfn-lint
+        run: |
+          pip install cfn-lint
+      - name: CFN Lint
+        run: |
+          cfn-lint ./lamnda.yaml
 
