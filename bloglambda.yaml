@@ -55,6 +55,11 @@ Resources:
           Id: TriggerForJiraData
   LambdaRole:
     Type: AWS::IAM::Role
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: W12
+            reason: "Policy is used for scanning of a wide range of resources"
     Properties:
       RoleName: JiraTARole
       AssumeRolePolicyDocument:
