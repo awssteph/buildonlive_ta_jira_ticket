@@ -1,6 +1,6 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Main CF template that builds shared resources and other stacks
+Description: Main CF template that builds shared resources and other stacks testttttt
 Parameters:
   DestinationBucket:
     Type: String
@@ -105,7 +105,11 @@ Resources:
                 Action:
                   - "support:*"
                 Resource: "*"
-              
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: F3
+            reason: "Policy is used for scanning of a wide range of resources"          
   Lambda:
     Type: AWS::Lambda::Function
     Properties:
