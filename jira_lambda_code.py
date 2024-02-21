@@ -67,6 +67,7 @@ def read_ta(account_id):
     project_key = os.environ['PROJECT_KEY'] 
     tickets = list_jira_tickets(api_token, project_key)
     
+    #Trusted Advisor Checks
     support = boto3.client('support', 'us-east-1')
     checks = support.describe_trusted_advisor_checks(language="en")["checks"] #https://boto3.amazonaws.com/v1/documentation/api/1.26.93/reference/services/support/client/describe_trusted_advisor_checks.html
 
@@ -77,7 +78,7 @@ def read_ta(account_id):
             check_name = check["name"]
             if check_name not in ignore_check_list:
                 for resource in result["flaggedResources"]:
-                    unique_id = f"{check_name}-{resource['resourceId']}"
+                    unique_id = f"ta-{check_name}-{resource['resourceId']}"
                     print(unique_id)
 
                     if unique_id in tickets: 
@@ -85,8 +86,29 @@ def read_ta(account_id):
                         exit
                     else: 
                         ta_data = dict(zip(check['metadata'], resource['metadata']))
-                        description = f'check_name: {check_name} data:{ta_data} account_id: {account_id}'
+                        description = f'ta_check_name: {check_name} data:{ta_data} account_id: {account_id}'
                         ticket = jira_ticket(connection, unique_id, description )
                         print(f"{ticket}-{check_name}")
         except Exception as e:
             print(f'{type(e)}: {e}')
+
+    #Cost Optimization Hub Checks
+    coh_client = boto3.client('cost-optimization-hub', region_name='us-east-1')
+    response = coh_client.list_recommendations()
+
+    for item in response['items']:
+        try:
+            account_id = item['accountId']
+            check_name = item['actionType']
+            unique_id = f"coh-{check_name}-{item['resourceId']}"
+            print(unique_id)
+            if unique_id in tickets: 
+                print(f"ticket for {unique_id} exist") 
+                exit
+            else: 
+                description = f'coh_check_name: {check_name} data:{item} account_id: {account_id}'
+                ticket = jira_ticket(connection, unique_id, description )
+                print(f"{ticket}-{check_name}")
+        except Exception as e:
+            print(f'{type(e)}: {e}')
+lambda_handler(None, None)
