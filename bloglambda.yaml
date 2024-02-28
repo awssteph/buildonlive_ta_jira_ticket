@@ -56,7 +56,6 @@ Resources:
   LambdaRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: JiraTARole
       AssumeRolePolicyDocument:
         Statement:
           - Action:
@@ -91,7 +90,11 @@ Resources:
                   - "ssm:Get*"
                   - "ssm:List*"
                 Resource: !Sub "arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${ParameterName}"
-              
+    Metadata:
+      cfn_nag:
+        rules_to_suppress:
+          - id: F3
+            reason: "Policy is used for collecting results for Trusted Advisor"          
   Lambda:
     Type: AWS::Lambda::Function
     Properties:
