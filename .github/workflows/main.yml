@@ -33,7 +33,7 @@ jobs:
           pip install cfn-lint
       - name: CFN Lint
         run: |
-          cfn-lint lambda.yaml
+          cfn-lint bloglambda.yaml
       - name: Install bandit
         run: |
           pip install bandit
