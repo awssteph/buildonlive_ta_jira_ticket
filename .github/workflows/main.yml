@@ -27,7 +27,7 @@ jobs:
           gem install cfn-nag
       - name: CFN Nag scan
         run: |
-          cfn_nag_scan --input-path  lambda.yaml
+          cfn_nag_scan --input-path bloglambda.yaml
       - name: Install cfn-lint
         run: |
           pip install cfn-lint
