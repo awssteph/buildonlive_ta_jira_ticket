@@ -102,9 +102,7 @@ Resources:
       cfn_nag:
         rules_to_suppress:
           - id: F3
-            reason: "Policy is used for collecting results for Trusted Advisor"
-      
-              
+            reason: "Policy is used for collecting results for Trusted Advisor"          
   Lambda:
     Type: AWS::Lambda::Function
     Properties:

@@ -3,6 +3,11 @@ on:
   pull_request:
     branches:
     - main
+  workflow_dispatch:
+      inputs:
+        name:
+          description: "test"
+          default: "test"
 jobs:
   check-cfn:
     runs-on: ubuntu-latest
@@ -22,11 +27,17 @@ jobs:
           gem install cfn-nag
       - name: CFN Nag scan
         run: |
-          cfn_nag_scan --input-path  lambda.yaml
+          cfn_nag_scan --input-path bloglambda.yaml
       - name: Install cfn-lint
         run: |
           pip install cfn-lint
       - name: CFN Lint
         run: |
-          cfn-lint lambda.yaml
+          cfn-lint bloglambda.yaml
+      - name: Install bandit
+        run: |
+          pip install bandit
+      - name: bandit check
+        run: |
+          bandit -r jira_lambda_code.py --confidence-level high
 
