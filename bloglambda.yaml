@@ -42,8 +42,8 @@ Mappings:
 Resources:
   CloudWatchTrigger:
     Type: AWS::Events::Rule
-    Name: LambdaCloudWatchTrigger
     Properties:
+      Name: LambdaCloudWatchTrigger
       Description: Lambda Data trigger
       ScheduleExpression: "cron(0 8 1 * ? *)"  
       State: ENABLED
